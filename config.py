@@ -23,7 +23,7 @@ GEOCODING_API_URL = "https://geocoding-api.open-meteo.com/v1/search"
 # ============== Weather Data Settings ==============
 
 DEFAULT_FORECAST_DAYS = 7
-REQUEST_TIMEOUT = 10  # seconds
+REQUEST_TIMEOUT = 30  # seconds
 
 # ============== Visualization Settings ==============
 

@@ -206,8 +206,8 @@ def extract_city_from_message(message: str) -> str:
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("  🌤️  Weather Outfit Assistant Web Server  🌤️")
+    print("  Weather Outfit Assistant Web Server")
     print("=" * 50)
-    print("  📍 Open: http://127.0.0.1:5000")
+    print("  Open: http://127.0.0.1:5000")
     print("=" * 50)
     app.run(host='0.0.0.0', port=5000, debug=True)
