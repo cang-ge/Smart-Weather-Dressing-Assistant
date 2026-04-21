@@ -1,0 +1,4 @@
+# 智能天气穿搭助手依赖
+requests>=2.25.0
+matplotlib>=3.3.0
+flask>=2.0.0
