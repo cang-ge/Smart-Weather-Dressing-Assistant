@@ -8,7 +8,9 @@
       "Bash(timeout 5 python web_app.py)",
       "mcp__filesystem__list_directory",
       "Bash(python -c \"from web_app import app; print\\('Web app loaded successfully'\\)\")",
-      "Bash(timeout 8 python web_app.py)"
+      "Bash(timeout 8 python web_app.py)",
+      "Bash(timeout 10 python web_app.py)",
+      "Bash(curl -s -X POST http://127.0.0.1:5000/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"message\\\\\":\\\\\"伦敦天气\\\\\"}\")"
     ]
   }
 }

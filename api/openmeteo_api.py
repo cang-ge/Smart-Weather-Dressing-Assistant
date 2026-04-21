@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.insert(0, str(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from config import OPEN_METEO_BASE_URL, REQUEST_TIMEOUT
-from utils.chinese_util import convert_chinese_to_pinyin, is_chinese
+from utils.chinese_util import convert_chinese_to_pinyin, is_chinese, get_english_city_name
 
 
 class OpenMeteoWeatherProvider(WeatherProvider):
@@ -57,7 +57,7 @@ class OpenMeteoWeatherProvider(WeatherProvider):
     def get_weather(self, city_name: str) -> Optional[Dict]:
         """
         Fetch weather from Open-Meteo API.
-        Automatically converts Chinese city names to pinyin.
+        Automatically converts Chinese city names to pinyin or English.
 
         Args:
             city_name: Name of the city (supports Chinese and English)
@@ -71,8 +71,16 @@ class OpenMeteoWeatherProvider(WeatherProvider):
             if result:
                 return result
 
-            # If failed and contains Chinese, try pinyin conversion
+            # If failed and contains Chinese, try conversion
             if is_chinese(city_name):
+                # 1. Try foreign cities mapping (e.g., 伦敦 -> London)
+                en_name = get_english_city_name(city_name)
+                if en_name:
+                    result = self._fetch_weather(en_name)
+                    if result:
+                        return result
+
+                # 2. Try pinyin conversion (e.g., 北京 -> beijing)
                 pinyin_name = convert_chinese_to_pinyin(city_name)
                 result = self._fetch_weather(pinyin_name)
                 if result:

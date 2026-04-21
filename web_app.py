@@ -117,10 +117,10 @@ def api_chat():
             weather_info = analyze_open_meteo_weather(weather_data)
             outfit = get_outfit_suggestion(weather_info, 'openmeteo')
 
-            response = f"📍 {city} 天气\n"
+            response = f"{city} 天气\n"
             response += f"天气: {weather_info.get('天气状况', '未知')}\n"
             response += f"温度: {weather_info.get('温度', '未知')}\n\n"
-            response += f"👗 穿搭建议:\n{outfit}"
+            response += f"穿搭建议:\n{outfit}"
 
             conversations[session_id].append({'role': 'assistant', 'content': response})
             return jsonify({'response': response, 'type': 'weather'})
@@ -129,7 +129,7 @@ def api_chat():
             return jsonify({'response': response, 'type': 'error'})
 
     # Show help text for unrecognized input
-    help_text = """你好！我是天气穿搭助手 🌤️
+    help_text = """你好！我是天气穿搭助手
 
 你可以这样问我：
 • "北京天气"
@@ -163,6 +163,7 @@ def extract_city_from_message(message: str) -> str:
 
     # Common cities list (prioritized by length to avoid partial matches)
     common_cities = [
+        # Chinese domestic cities
         '北京', '上海', '广州', '深圳', '杭州', '南京', '成都', '重庆',
         '武汉', '西安', '苏州', '天津', '长沙', '郑州', '青岛', '济南',
         '南昌', '大连', '沈阳', '哈尔滨', '长春', '福州', '厦门', '泉州',
@@ -170,10 +171,20 @@ def extract_city_from_message(message: str) -> str:
         '银川', '乌鲁木齐', '拉萨', '呼和浩特', '海口', '三亚', '珠海',
         '佛山', '东莞', '无锡', '常州', '徐州', '南通', '扬州', '镇江',
         '盐城', '泰州',
+        # English city names
         'beijing', 'shanghai', 'guangzhou', 'shenzhen', 'hangzhou',
         'nanjing', 'chengdu', 'chongqing', 'wuhan', 'xian', 'suzhou',
         'tokyo', 'osaka', 'seoul', 'bangkok', 'singapore',
-        'new york', 'london', 'paris', 'berlin', 'sydney', 'toronto'
+        'new york', 'london', 'paris', 'berlin', 'sydney', 'toronto',
+        # Chinese foreign cities
+        '伦敦', '巴黎', '柏林', '东京', '纽约', '洛杉矶', '悉尼', '首尔',
+        '曼谷', '新加坡', '罗马', '米兰', '马德里', '巴塞罗那',
+        '阿姆斯特丹', '苏黎世', '维也纳', '布拉格', '莫斯科',
+        '伊斯坦布尔', '迪拜', '孟买', '新德里', '雅加达', '吉隆坡',
+        '开罗', '约翰内斯堡', '里约热内卢', '布宜诺斯艾利斯',
+        '墨西哥城', '温哥华', '多伦多', '蒙特利尔', '旧金山',
+        '西雅图', '波士顿', '芝加哥', '休斯顿', '迈阿密',
+        '堪培拉', '墨尔本', '布里斯班', '奥克兰',
     ]
 
     message_lower = message.lower().strip()
