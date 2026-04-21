@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ### 2. 运行
 
 ```bash
-python weather_agent.py
+python web_app.py
 ```
 
 ### 3. 输入城市名
