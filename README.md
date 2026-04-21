@@ -98,6 +98,7 @@ pip install -r requirements.txt
 
 ```bash
 python web_app.py
+<<<<<<< HEAD
 ```
 
 Then open in browser: http://127.0.0.1:5000
@@ -110,6 +111,8 @@ python weather_agent.py Beijing
 
 # Interactive mode without arguments
 python weather_agent.py
+=======
+>>>>>>> 17e338b607d6e9e589f2e84f22c59cbae6a12d49
 ```
 
 ---
