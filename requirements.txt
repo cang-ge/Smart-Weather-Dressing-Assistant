@@ -2,3 +2,4 @@
 requests>=2.25.0
 matplotlib>=3.3.0
 flask>=2.0.0
+pypinyin>=0.50.0
